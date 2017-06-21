@@ -33,9 +33,17 @@ min(table1$num_of_times_ordered)
 2. no of items in a customers cart. per customer, per cart.
 
 ```{r}
-
+per_cust_per_cart <- orders %>% 
+  select(user_id, order_id) %>% 
+  inner_join(order_products %>% select(order_id, product_id), by = "order_id") %>% 
+  group_by(user_id, order_id) %>% 
+  summarise(num_of_items_per_cust_per_cart = n())
 ```
 
+```{r}
+per_cust_per_cart %>% 
+  ggplot(aes(num_of_items_per_cust_per_cart)) + geom_histogram(binwidth = 1)
+```
 
 3. no of aisles and depts in a customers cart
 4. Reorder frequency (no of days )
