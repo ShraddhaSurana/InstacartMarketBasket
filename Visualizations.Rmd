@@ -1,0 +1,41 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
+
+```{r}
+plot(cars)
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Cmd+Shift+K* to preview the HTML file).
+
+1. No of times a customer has ordered
+
+```{r}
+library(tidyverse)
+table1 <- orders %>% 
+  group_by(user_id) %>% 
+  select(user_id, order_id) %>% 
+  summarize(num_of_times_ordered = n())
+  
+table1 %>% 
+  ggplot(aes(num_of_times_ordered)) + geom_histogram(binwidth = 1)
+
+min(table1$num_of_times_ordered)
+```
+
+2. no of items in a customers cart. per customer, per cart.
+
+```{r}
+
+```
+
+
+3. no of aisles and depts in a customers cart
+4. Reorder frequency (no of days )
